@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task Manager</title>
+  <style>
+    body { font-family: Georgia, serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #1f2933; background: #fbfaf7; }
+    h1 { margin-bottom: 0; }
+    #student-id { color: #52606d; margin-top: 0.25rem; }
+    form { display: grid; gap: 0.5rem; margin: 1.5rem 0; }
+    input, button { font: inherit; padding: 0.5rem; }
+    button { cursor: pointer; }
+    .task-item { border: 1px solid #cbd2d9; border-radius: 6px; padding: 0.75rem; margin-bottom: 0.75rem; background: #fff; }
+    .task-item.done .task-title { text-decoration: line-through; color: #7b8794; }
+    .task-title { font-weight: bold; margin: 0; }
+    .task-description { margin: 0.25rem 0; color: #52606d; }
+    .task-status { font-size: 0.9rem; margin: 0.25rem 0 0.5rem; }
+    #status-message { min-height: 1.5rem; font-weight: bold; }
+    #status-message.error { color: #b42318; }
+    :focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <h1>Task Manager</h1>
+  <p>Student ID: <span id="student-id">STUDENT_ID</span></p>
+
+  <p id="status-message" role="status"></p>
+
+  <form id="task-form">
+    <input type="text" id="task-title" placeholder="Task title" required>
+    <input type="text" id="task-description" placeholder="Description (optional)">
+    <button type="submit" id="task-submit">Add task</button>
+  </form>
+
+  <div id="task-list"></div>
+
+  <p><a id="contribution-link" href="contribution.html">Team contribution page</a></p>
+
+  <script src="app.js"></script>
+</body>
+</html>
