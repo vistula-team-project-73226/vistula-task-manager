@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Team Contribution</title>
+</head>
+<body>
+
+    <h1>Team Contribution</h1>
+
+    <button id="load-contributor">Show Contributors</button>
+
+    <div id="contributors-output"></div>
+
+    <p>
+        <a href="index.html">Back to Task Manager</a>
+    </p>
+
+    <script>
+        const output = document.getElementById('contributors-output');
+
+        document.getElementById('load-contributor')
+            .addEventListener('click', async () => {
+
+                try {
+                    const res = await fetch('contribution.json');
+
+                    if (!res.ok) {
+                        throw new Error('Request failed (' + res.status + ')');
+                    }
+
+                    const data = await res.json();
+
+                    output.innerHTML = '';
+
+                    const heading = document.createElement('h2');
+                    heading.textContent = 'Our Contributors';
+
+                    const list = document.createElement('ul');
+
+                    data.contributors.forEach(contributor => {
+
+                        const item = document.createElement('li');
+
+                        const name = contributor.name
+                            ? contributor.name + ' - '
+                            : '';
+
+                        item.textContent =
+                            name + 'Student ID: ' + contributor.studentId;
+
+                        list.appendChild(item);
+                    });
+
+                    output.append(heading, list);
+
+                } catch (e) {
+                    output.textContent =
+                        'Could not load contributors: ' + e.message;
+                }
+            });
+    </script>
+
+</body>
+</html>
