@@ -1,67 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Team Contribution</title>
+  <meta charset="UTF-8">
+  <title>Team Contribution</title>
 </head>
 <body>
+  <h1>Team Contribution</h1>
+  <button id="load-contributor">Show Contributor</button>
+  <p id="contributor-student-id"></p>
+  <p><a href="index.html">Back to Task Manager</a></p>
 
-    <h1>Team Contribution</h1>
-
-    <button id="load-contributor">Show Contributors</button>
-
-    <div id="contributors-output"></div>
-
-    <p>
-        <a href="index.html">Back to Task Manager</a>
-    </p>
-
-    <script>
-        const output = document.getElementById('contributors-output');
-
-        document.getElementById('load-contributor')
-            .addEventListener('click', async () => {
-
-                try {
-                    const res = await fetch('contribution.json');
-
-                    if (!res.ok) {
-                        throw new Error(
-                            'Request failed (' + res.status + ')'
-                        );
-                    }
-
-                    const data = await res.json();
-
-                    output.innerHTML = '';
-
-                    const heading = document.createElement('h2');
-                    heading.textContent = 'Our Contributors';
-
-                    const list = document.createElement('ul');
-
-                    data.contributors.forEach(contributor => {
-
-                        const item = document.createElement('li');
-
-                        item.textContent =
-                            'Student ID: ' + contributor.studentId +
-                            (contributor.name
-                                ? '\u00A0\u00A0Student Name: ' + contributor.name
-                                : '');
-
-                        list.appendChild(item);
-                    });
-
-                    output.append(heading, list);
-
-                } catch (e) {
-                    output.textContent =
-                        'Could not load contributors: ' + e.message;
-                }
-            });
-    </script>
-
+  <script>
+    const output = document.getElementById('contributor-student-id');
+    document.getElementById('load-contributor').addEventListener('click', async () => {
+      try {
+        const res = await fetch('contribution.json');
+        if (!res.ok) throw new Error('Request failed (' + res.status + ')');
+        const data = await res.json();
+        output.textContent = 'Contributor Student ID: ' + data.contributorStudentId;
+      } catch (e) {
+        output.textContent = 'Could not load contributor: ' + e.message;
+      }
+    });
+  </script>
 </body>
 </html>
