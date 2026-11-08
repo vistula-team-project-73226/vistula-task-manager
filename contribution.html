@@ -27,7 +27,9 @@
                     const res = await fetch('contribution.json');
 
                     if (!res.ok) {
-                        throw new Error('Request failed (' + res.status + ')');
+                        throw new Error(
+                            'Request failed (' + res.status + ')'
+                        );
                     }
 
                     const data = await res.json();
@@ -43,12 +45,11 @@
 
                         const item = document.createElement('li');
 
-                        const name = contributor.name
-                            ? contributor.name + ' - '
-                            : '';
-
                         item.textContent =
-                            name + 'Student ID: ' + contributor.studentId;
+                            'Student ID: ' + contributor.studentId +
+                            (contributor.name
+                                ? '\u00A0\u00A0Student Name: ' + contributor.name
+                                : '');
 
                         list.appendChild(item);
                     });
